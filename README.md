@@ -1,5 +1,5 @@
-# Azure Batch HBASE to JSON converter
-This repository offers Azure Batch templates to run parallel convertion jobs from HBASE sequence file to JSON format. 
+# Azure Batch HBASE sequence file to JSON converter
+This repository offers Azure Batch templates to run parallel convertion jobs from HBASE sequence file to JSON. 
 
 ## Prerequisites
 1. Azure [subscription](https://azure.microsoft.com/en-us/) 
@@ -62,11 +62,10 @@ In the template parameter window select your pool and provide the parameters:
  Click *Run and close* button to start the job.
 
 ### IV. Monitoring the job
-After the job is started you should see it in *Jobs* tab with all the tasks that have been created to process files from the input filegroup container:
-![job-view](screenshots/job-view.png)
-
+After the job is started you should see it in *Jobs* tab with all the tasks that have been created to process files from the input filegroup container.  
 By clicking on the pool link in the job view you can jump to the view of your pool in *Pools* tab.  
-You can also click on each task in the job view to dig into task details in the task view:
+You can also click on each task in the job view to dig into task details in the task view.
+![job-view](screenshots/job-view.png)
 ![pool-view](screenshots/pool-view.png)
  
 You can follow task progress e.g. by opening its stdout stream in *stdout.txt* file:
