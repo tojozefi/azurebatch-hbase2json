@@ -1,5 +1,5 @@
-# Azure Batch HBASE sequence file to JSON converter
-This repository offers Azure Batch templates to run parallel convertion jobs from HBASE sequence file to JSON. 
+# Azure Batch HBASE to JSON converter
+This repository offers Azure Batch templates to run parallel convertion jobs from HBASE sequence file to JSON format. 
 
 ## Prerequisites
 1. Azure [subscription](https://azure.microsoft.com/en-us/) 
