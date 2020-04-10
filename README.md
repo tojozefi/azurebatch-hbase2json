@@ -65,8 +65,8 @@ In the template parameter window select your pool and provide the parameters:
 After the job is started you should see it in *Jobs* tab with all the tasks that have been created to process files from the input filegroup container:
 ![job-view](screenshots/job-view.png)
 
-By clicking on the pool link in the job view you can jump to the view of your pool in *Pools* tab:
-You can click on each task in the job view to dig into task details in the task view:
+By clicking on the pool link in the job view you can jump to the view of your pool in *Pools* tab.  
+You can also click on each task in the job view to dig into task details in the task view:
 ![pool-view](screenshots/pool-view.png)
  
 You can follow task progress e.g. by opening its stdout stream in *stdout.txt* file:
