@@ -1,0 +1,112 @@
+{
+    "templateMetadata":{
+        "description":"Job template for Sequencer app"
+    },
+    "parameters":{
+		"jobName":{
+            "type":"string",
+            "defaultValue":"sequencer",
+            "metadata":{
+                "description":"The job name"
+            }
+        },
+		"poolId":{
+            "type":"string",
+            "metadata":{
+                "description":"The pool id"
+            }
+        },
+		"jarFile":{
+            "type":"string",
+            "defaultValue":"sequencefiletransformer-0.0.1-SNAPSHOT.jar",
+            "metadata":{
+                "description":"Sequencer code JAR file"
+            }
+        },
+        "inputFilegroup":{
+            "type":"string",
+			"defaultValue":"fgrp-sequencer-input",
+            "metadata":{
+                "description":"The file group for input files",
+                "advancedType":"file-group"
+            }
+        },
+        "assetFilegroup":{
+            "type":"string",
+            "defaultValue":"fgrp-sequencer-code",
+            "metadata":{
+                "description":"The file group for JAR file",
+                "advancedType":"file-group"
+            }
+        },
+        "outputFilegroup":{
+            "type":"string",
+		 "defaultValue":"fgrp-sequencer-output",
+            "metadata":{
+                "description":"The file group for outputs",
+                "advancedType":"file-group"
+            }
+        }
+    },
+    "job":{
+        "type":"Microsoft.Batch/batchAccounts/jobs",
+        "properties":{
+            "id":"[parameters('jobName')]",
+            "displayName":"Sequencer job",
+            "onAllTasksComplete":"terminateJob",
+            "poolInfo": {
+                "poolId": "[parameters('poolId')]"
+            },
+            "taskFactory":{
+                "type":"taskPerFile",
+                "source":{
+                    "fileGroup": "[parameters('inputFilegroup')]"
+                },
+                "repeatTask":{
+                    "displayName":"Process file {fileName}",
+                    "commandLine":"mkdir output; java -jar [parameters('jarFile')] --sourceFile={fileName} --destinationPath=output",
+                    "resourceFiles": [
+                        {
+                            "httpUrl": "{url}",
+                            "filePath": "{fileName}"
+                        },
+                        {
+                            "source": {
+                            "fileGroup": "[parameters('assetFilegroup')]" }
+                        }
+                    ],
+                    "outputFiles":[
+                        {
+                            "filePattern":"../std*.txt",
+                            "destination":{
+                                "autoStorage":{
+                                    "fileGroup":"[parameters('outputFilegroup')]",
+                                    "path":"[parameters('jobName')]/{fileName}"
+                                }
+                            },
+                            "uploadOptions":{
+                                "uploadCondition":"taskCompletion"
+                            }
+                        },
+                        {
+                            "filePattern":"output*.json",
+                            "destination":{
+                                "autoStorage":{
+                                    "fileGroup":"[parameters('outputFilegroup')]",
+                                    "path":"[parameters('jobName')]/{fileName}"
+                                }
+                            },
+                            "uploadOptions":{
+                                "uploadCondition":"taskSuccess"
+                            }
+                        }
+                    ],
+					"constraints": {
+						"retentionTime": "P0D",
+						"maxTaskRetryCount": 0
+					}
+                }
+            }
+        }
+    }
+}
