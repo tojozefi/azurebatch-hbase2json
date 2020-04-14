@@ -44,8 +44,9 @@ Provide a name for the input data file group (the default name is *sequencer-inp
 4. Upload the code JAR file to *sequencer-code* file-group container:
 ![sequencer-code-dragndrop](screenshots/sequencer-code-dragndrop.png)
 
-You are now ready to run the HBASE-to-JSON conversion jobs. 
+Refer to [this](https://github.com/cosh/sequenceFileTransformer) repo for access to HBASE to JSON converter code.
 
+You are now ready to run the HBASE-to-JSON conversion jobs. 
 
 ### III. Running the job from template  
 1. Go to *Gallery* tab and click *Pick a local template* button:
