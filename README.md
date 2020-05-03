@@ -119,7 +119,7 @@ e) Copy the generated URI and paste into *config.py* as the value of *_OUTPUT_CO
 _OUTPUT_CONTAINER_URL = 'https://tojobatch.blob.core.windows.net/fgrp-sequencer-output?st=2020-05-02T12%3A05%3A13Z&se=2020-06-03T12%3A05%3A00Z&sp=w&sv=2018-03-28&sr=c&sig=xxx'
 
 3. Provide other job environment settings in *config.py*:  
- _JAR_CONTAINER - name of blob container in Batch-linked storage account with converter code JAR files. Default value: fgrp-sequencer-code  
+ _JAR_CONTAINER - name of blob container in Batch-linked storage account with converter code JAR files. See [here](https://github.com/tojozefi/azurebatch-hbase2json/blob/master/README.md#ii-preparing-file-group-containers-for-running-convertion-jobs) for info how to upload files to this container. Default value: fgrp-sequencer-code  
  _JAR_FILE - name of converter code JAR file to be used for job execution. Default value: sequencefiletransformer-0.0.1-SNAPSHOT.jar  
  _POOL_VM_SIZE - Batch pool VM size. Recommended VM sizes: Standard_H16 or Standard_H16_Promo  
  _MAX_NODES - Maximum allowed number of VMs in the pool. Should be set to equivalent to core quota in Batch account. Default value (for H16 VM-series): 5  
