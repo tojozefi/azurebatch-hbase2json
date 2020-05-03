@@ -91,10 +91,12 @@ You might also consider using pool [autoscaling](https://docs.microsoft.com/en-u
 
 ### Preparation (one-time action) 
 1. Open a Linux shell session with [PIP](https://pypi.org/project/pip/) (Package Installer for Python).  
- Hint: [Azure Cloud Shell](https://shell.azure.com) Bash service has pip pre-installed. 
+ Hint: [Azure Cloud Shell](https://shell.azure.com) (Bash variant) has PIP pre-installed. 
 2. Install the needed Python packages with the following command:  `$ pip install azure-storage-blob azure-batch`
-3. Clone this repository: `git clone git https://github.com/tojozefi/azurebatch-hbase2json.git`  
- The scripts that you need to run the HBASE-to-JSON convertion job are *config.py* and *convert-hbase2json.py* in *azurebatch-hbase2json* folder. 
+3. Clone this repository: `git clone https://github.com/tojozefi/azurebatch-hbase2json.git`  
+ The scripts that you need to run the HBASE-to-JSON convertion jobs are available in *azurebatch-hbase2json* folder:  
+ *config.py* - script with job environment settings, and  
+ *convert-hbase2json.py* - the run script. 
 
 ### I. Configuring your job environment in *config.py* script
 1. Fill your Batch account credentials: _BATCH_ACCOUNT_NAME, _BATCH_ACCOUNT_KEY and _BATCH_ACCOUNT_URL
@@ -132,8 +134,8 @@ Run the conversion job with command: `cd azurebatch-hbase2json; python convert-h
 
 Script *convert-hbase2json.py* will create a Batch job with given name and will generate a conversion task for every input blob found in the input container.  
 Optional prefix filter can be used to run the conversion on specific blobs in the container - e.g. in specific virtual folder.  
-Tasks will be executed on automatically created pool of VMs. As many VMs will be created as necessary to process the generated tasks, up to the limit defined in config._MAX_NODES.  
-The task outputs will be persisted in the output container, under *jobname/blobname* wirtual folder.  
+Tasks will be executed on automatically created pool of VMs. As many VMs will be created as necessary to process the generated tasks, up to the limit defined in config.MAX_NODES.  
+The task outputs will be persisted in the output container, under *jobname/blobname* virtual folder.  
 After the job is complete, the VM pool will be automatically deleted.  
 
 ### III. Monitoring the job
